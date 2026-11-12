@@ -13,6 +13,17 @@ config_version=5
 config/name="US6: THE CIGAR FELL"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
+run/main_scene="res://scenes/main/main.tscn"
+
+[input]
+move_left={"deadzone": 0.5, "events": []}
+move_right={"deadzone": 0.5, "events": []}
+jump={"deadzone": 0.5, "events": []}
+dodge={"deadzone": 0.5, "events": []}
+attack={"deadzone": 0.5, "events": []}
+strong_attack={"deadzone": 0.5, "events": []}
+interact={"deadzone": 0.5, "events": []}
+use_potion={"deadzone": 0.5, "events": []}
 
 [display]
 
