@@ -4,6 +4,14 @@ extends RefCounted
 var _abilities: Array[StringName] = []
 var _artifacts: Array[StringName] = []
 
+var abilities: Array[StringName]:
+	get:
+		return _abilities
+
+var artifacts: Array[StringName]:
+	get:
+		return _artifacts
+
 func reset() -> void:
 	_abilities.clear()
 	_artifacts.clear()
@@ -31,7 +39,4 @@ func snapshot() -> Dictionary:
 	var artifacts: Array[String] = []
 	for id: StringName in _artifacts:
 		artifacts.append(String(id))
-	return {
-		"abilities": abilities,
-		"artifacts": artifacts,
-	}
+	return {"abilities": abilities, "artifacts": artifacts}
