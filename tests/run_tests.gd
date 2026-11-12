@@ -10,6 +10,7 @@ const WarehouseTests = preload("res://tests/integration/test_warehouse_rewards.g
 const LanaTests = preload("res://tests/integration/test_lana_encounter.gd")
 const BaseTests = preload("res://tests/unit/test_base_state_view.gd")
 const RyazanTests = preload("res://tests/integration/test_ryazan_flow.gd")
+const DanangTests = preload("res://tests/integration/test_danang_flow.gd")
 
 var failures: Array[String] = []
 
@@ -24,6 +25,7 @@ func _initialize() -> void:
 	_run_test("LanaEncounter", LanaTests.new())
 	_run_test("BaseState", BaseTests.new())
 	_run_test("RyazanFlow", RyazanTests.new())
+	_run_test("DanangFlow", DanangTests.new())
 	if failures.is_empty():
 		print("=== ALL PASS ===")
 		quit(0)
