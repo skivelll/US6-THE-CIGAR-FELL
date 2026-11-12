@@ -1,0 +1,38 @@
+[gd_scene format=3]
+
+[node name="PortakFinale" type="Node2D"]
+
+[node name="Arena" type="ColorRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 640.0
+color = Color(0.07, 0.12, 0.18, 1)
+mouse_filter = 2
+
+[node name="WebSilhouette" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(570, 150, 680, 100, 790, 150, 850, 300, 790, 440, 680, 500, 570, 440, 510, 300)
+color = Color(0.75, 0.88, 0.95, 1)
+
+[node name="WebLines" type="Line2D" parent="."]
+points = PackedVector2Array(510, 300, 850, 300, 680, 100, 680, 500, 570, 150, 790, 440, 790, 150, 570, 440)
+width = 5.0
+default_color = Color(0.2, 0.75, 0.9, 0.8)
+
+[node name="Title" type="Label" parent="."]
+offset_left = 80.0
+offset_top = 60.0
+offset_right = 1200.0
+offset_bottom = 110.0
+theme_override_colors/font_color = Color(0.45, 0.9, 0.95, 1)
+theme_override_font_sizes/font_size = 30
+text = "ФАЗА 1 · ПОРТАК · ПАУТИНА И ЛОВУШКИ"
+horizontal_alignment = 1
+
+[node name="Telegraph" type="Label" parent="."]
+offset_left = 140.0
+offset_top = 550.0
+offset_right = 1140.0
+offset_bottom = 600.0
+theme_override_colors/font_color = Color(1, 0.72, 0.38, 1)
+theme_override_font_sizes/font_size = 18
+text = "Читаемый телеграф: натяжение паутины перед выпадом"
+horizontal_alignment = 1

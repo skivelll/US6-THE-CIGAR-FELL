@@ -1,0 +1,42 @@
+[gd_scene format=3]
+
+[node name="WatchmanFinale" type="Node2D"]
+
+[node name="Arena" type="ColorRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 640.0
+color = Color(0.12, 0.09, 0.16, 1)
+mouse_filter = 2
+
+[node name="DeviceBody" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(560, 170, 800, 170, 860, 350, 780, 460, 560, 460, 480, 350)
+color = Color(0.4, 0.48, 0.52, 1)
+
+[node name="Wires" type="Line2D" parent="."]
+points = PackedVector2Array(560, 220, 390, 130, 260, 230, 480, 350, 850, 350, 1010, 230, 900, 130, 800, 220)
+width = 8.0
+default_color = Color(0.95, 0.55, 0.2, 0.9)
+
+[node name="WarningLight" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(660, 240, 700, 200, 740, 240, 700, 280)
+color = Color(1, 0.25, 0.2, 1)
+
+[node name="Title" type="Label" parent="."]
+offset_left = 80.0
+offset_top = 60.0
+offset_right = 1200.0
+offset_bottom = 110.0
+theme_override_colors/font_color = Color(1, 0.7, 0.38, 1)
+theme_override_font_sizes/font_size = 30
+text = "ФАЗА 2 · СМОТРИТЕЛЬ · ПРОВОДА И КУСТАРНАЯ ЭЛЕКТРОНИКА"
+horizontal_alignment = 1
+
+[node name="Telegraph" type="Label" parent="."]
+offset_left = 140.0
+offset_top = 550.0
+offset_right = 1140.0
+offset_bottom = 600.0
+theme_override_colors/font_color = Color(1, 0.72, 0.38, 1)
+theme_override_font_sizes/font_size = 18
+text = "Читаемый телеграф: лампа вспыхивает перед разрядом"
+horizontal_alignment = 1
