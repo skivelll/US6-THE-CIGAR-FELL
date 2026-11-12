@@ -3,6 +3,8 @@ extends SceneTree
 const ProgressStateTests = preload("res://tests/unit/test_progress_state.gd")
 const PlayerTests = preload("res://tests/unit/test_player.gd")
 const CheckpointTests = preload("res://tests/unit/test_checkpoint_manager.gd")
+const CombatTests = preload("res://tests/unit/test_combat_kernel.gd")
+const EncounterTests = preload("res://tests/unit/test_encounter_controller.gd")
 
 var failures: Array[String] = []
 
@@ -10,6 +12,8 @@ func _initialize() -> void:
 	_run_test("ProgressState", ProgressStateTests.new())
 	_run_test("Player", PlayerTests.new())
 	_run_test("CheckpointManager", CheckpointTests.new())
+	_run_test("CombatKernel", CombatTests.new())
+	_run_test("EncounterController", EncounterTests.new())
 	if failures.is_empty():
 		print("=== ALL PASS ===")
 		quit(0)
