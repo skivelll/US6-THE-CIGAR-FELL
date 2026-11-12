@@ -1,36 +1,27 @@
-class_name CheckpointManager
 extends Node
 
-var has_checkpoint: bool = false
-var active_checkpoint_id: StringName = &""
-var active_position: Vector2 = Vector2.ZERO
-var active_health: int = 100
-var active_potion_charges: int = 0
+signal checkpoint_activated(id: StringName)
 
-func activate(checkpoint_id: StringName, spawn_position: Vector2, health: int = 100, potion_charges: int = 0) -> void:
-	has_checkpoint = true
-	active_checkpoint_id = checkpoint_id
-	active_position = spawn_position
-	active_health = health
-	active_potion_charges = potion_charges
+const DEFAULT_RESPAWN_POSITION: Vector2 = Vector2(100.0, 300.0)
 
-func activate_checkpoint(checkpoint_id: StringName, position: Vector2) -> void:
-	activate(checkpoint_id, position)
+var _checkpoints: Dictionary = {}
+var _current_id: StringName = &""
+
+func register_checkpoint(id: StringName, position: Vector2) -> void:
+	if id != &"":
+		_checkpoints[id] = position
+
+func activate_checkpoint(id: StringName) -> void:
+	if not _checkpoints.has(id):
+		return
+	_current_id = id
+	checkpoint_activated.emit(id)
 
 func get_respawn_position() -> Vector2:
-	return active_position
-
-func respawn_state() -> Dictionary:
-	return {
-		"id": String(active_checkpoint_id),
-		"position": active_position,
-		"health": active_health,
-		"potion_charges": active_potion_charges,
-	}
+	if _checkpoints.has(_current_id):
+		return _checkpoints[_current_id] as Vector2
+	return DEFAULT_RESPAWN_POSITION
 
 func reset() -> void:
-	has_checkpoint = false
-	active_checkpoint_id = &""
-	active_position = Vector2.ZERO
-	active_health = 100
-	active_potion_charges = 0
+	_checkpoints.clear()
+	_current_id = &""

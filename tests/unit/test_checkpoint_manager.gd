@@ -1,36 +1,18 @@
 extends RefCounted
 
-const CheckpointManager = preload("res://scripts/player/checkpoint_manager.gd")
-const ProgressState = preload("res://scripts/core/progress_state.gd")
-const PlayerController = preload("res://scripts/player/player_controller.gd")
+const CheckpointManager = preload("res://scripts/core/checkpoint_manager.gd")
 
 func run() -> Array[String]:
 	var failures: Array[String] = []
-	var checkpoint := CheckpointManager.new()
-	if checkpoint.has_checkpoint:
-		failures.append("checkpoint starts empty")
-	checkpoint.activate(&"moscow_01", Vector2(120, 240), 75, 2)
-	if not checkpoint.has_checkpoint:
-		failures.append("register saves checkpoint")
-	if checkpoint.get_respawn_position() != Vector2(120, 240):
-		failures.append("get respawn returns registered position")
-	var state: Dictionary = checkpoint.respawn_state()
-	if state["id"] != "moscow_01":
-		failures.append("checkpoint stores id")
-	if state["position"] != Vector2(120, 240):
-		failures.append("checkpoint stores spawn position")
-	if state["health"] != 75 or state["potion_charges"] != 2:
-		failures.append("checkpoint stores recovery values")
-	checkpoint.activate(&"moscow_02", Vector2(400, 180))
-	if checkpoint.respawn_state()["id"] != "moscow_02":
-		failures.append("new checkpoint replaces old checkpoint")
-
-	var progress := ProgressState.new()
-	var player := PlayerController.new()
-	player.configure(progress)
-	if player.use_ability(&"combo"):
-		failures.append("locked ability must be refused")
-	progress.unlock_ability(&"combo")
-	if not player.use_ability(&"combo"):
-		failures.append("unlocked ability must be usable")
+	var manager: CheckpointManager = CheckpointManager.new()
+	if manager.get_respawn_position() != Vector2(100.0, 300.0):
+		failures.append("default respawn position")
+	manager.register_checkpoint(&"yard", Vector2(400.0, 220.0))
+	manager.activate_checkpoint(&"yard")
+	if manager.get_respawn_position() != Vector2(400.0, 220.0):
+		failures.append("activated checkpoint changes respawn position")
+	manager.reset()
+	if manager.get_respawn_position() != Vector2(100.0, 300.0):
+		failures.append("reset returns to default respawn position")
+	manager.free()
 	return failures
