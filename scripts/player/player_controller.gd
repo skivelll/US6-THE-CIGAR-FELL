@@ -53,20 +53,31 @@ func _physics_process(delta: float) -> void:
 			is_dodging = false
 		move_and_slide()
 		return
-	var direction: float = Input.get_axis("move_left", "move_right")
-	if direction == 0.0:
-		direction = Input.get_axis("ui_left", "ui_right")
-	var running: bool = Input.is_action_pressed("run")
+	var direction: float = _get_horizontal_direction()
+	var running: bool = Input.is_action_pressed("run") or Input.is_key_pressed(KEY_SHIFT)
 	var speed: float = RUN_SPEED if running else WALK_SPEED
 	velocity.x = direction * speed
-	if is_on_floor() and (Input.is_action_just_pressed("jump") or Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_accept")):
+	if is_on_floor() and _jump_requested():
 		velocity.y = JUMP_VELOCITY
 	if is_on_floor() and _dodge_requested(direction):
 		_start_dodge(direction)
 	move_and_slide()
 
+func _get_horizontal_direction() -> float:
+	var direction: float = Input.get_axis("move_left", "move_right")
+	if direction == 0.0:
+		direction = Input.get_axis("ui_left", "ui_right")
+	if Input.is_key_pressed(KEY_A) or Input.is_key_pressed(KEY_LEFT):
+		direction = -1.0
+	elif Input.is_key_pressed(KEY_D) or Input.is_key_pressed(KEY_RIGHT):
+		direction = 1.0
+	return direction
+
+func _jump_requested() -> bool:
+	return Input.is_action_just_pressed("jump") or Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_accept") or Input.is_key_pressed(KEY_SPACE) and not Input.is_action_pressed("jump")
+
 func _dodge_requested(direction: float) -> bool:
-	if Input.is_action_just_pressed("dodge") and direction != 0.0:
+	if (Input.is_action_just_pressed("dodge") or Input.is_key_pressed(KEY_CTRL)) and direction != 0.0:
 		return true
 	if direction == 0.0 or direction == _last_direction:
 		return false
