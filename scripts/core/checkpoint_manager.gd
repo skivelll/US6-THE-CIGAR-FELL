@@ -1,12 +1,14 @@
 class_name CheckpointManager
 extends Node
 
-var active_checkpoint_id: StringName = &"start"
+var has_checkpoint: bool = false
+var active_checkpoint_id: StringName = &""
 var active_position: Vector2 = Vector2.ZERO
-var active_health: int = 3
+var active_health: int = 100
 var active_potion_charges: int = 0
 
-func activate(checkpoint_id: StringName, spawn_position: Vector2, health: int = 3, potion_charges: int = 0) -> void:
+func activate(checkpoint_id: StringName, spawn_position: Vector2, health: int = 100, potion_charges: int = 0) -> void:
+	has_checkpoint = true
 	active_checkpoint_id = checkpoint_id
 	active_position = spawn_position
 	active_health = health
@@ -27,7 +29,8 @@ func respawn_state() -> Dictionary:
 	}
 
 func reset() -> void:
-	active_checkpoint_id = &"start"
+	has_checkpoint = false
+	active_checkpoint_id = &""
 	active_position = Vector2.ZERO
-	active_health = 3
+	active_health = 100
 	active_potion_charges = 0

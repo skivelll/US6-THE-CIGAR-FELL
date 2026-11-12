@@ -5,7 +5,7 @@ signal health_changed(current_hp: int, maximum_hp: int)
 signal died
 signal respawned
 
-const MAX_HP: int = 3
+const MAX_HP: int = 100
 
 var max_hp: int = MAX_HP
 var hp: int = MAX_HP

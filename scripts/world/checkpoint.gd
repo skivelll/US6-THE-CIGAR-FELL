@@ -10,5 +10,5 @@ func _on_body_entered(body: Node2D) -> void:
 	var player: PlayerController = body as PlayerController
 	if player == null:
 		return
-	CheckpointManager.activate_checkpoint(checkpoint_id, global_position)
+	CheckpointManagerSingleton.activate_checkpoint(checkpoint_id, global_position)
 	player.set_checkpoint(global_position)

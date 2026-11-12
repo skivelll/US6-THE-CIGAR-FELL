@@ -6,14 +6,14 @@ const PlayerStatsScript = preload("res://scripts/player/player_stats.gd")
 signal died
 signal respawned
 
-const SPEED: float = 200.0
-const JUMP_VELOCITY: float = -450.0
-const RUN_MULTIPLIER: float = 1.6
-const DODGE_SPEED: float = 400.0
+const WALK_SPEED: float = 200.0
+const RUN_SPEED: float = 350.0
+const JUMP_VELOCITY: float = -500.0
+const DODGE_SPEED: float = 500.0
 const DODGE_DURATION: float = 0.25
 const DOUBLE_TAP_WINDOW: float = 0.25
 const GRAVITY: float = 980.0
-const MAX_HP: int = 3
+const MAX_HP: int = 100
 
 var stats: RefCounted = PlayerStatsScript.new()
 var is_dodging: bool = false
@@ -54,10 +54,12 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 	var direction: float = Input.get_axis("move_left", "move_right")
+	if direction == 0.0:
+		direction = Input.get_axis("ui_left", "ui_right")
 	var running: bool = Input.is_action_pressed("run")
-	var speed: float = SPEED * (RUN_MULTIPLIER if running else 1.0)
+	var speed: float = RUN_SPEED if running else WALK_SPEED
 	velocity.x = direction * speed
-	if is_on_floor() and Input.is_action_just_pressed("jump"):
+	if is_on_floor() and (Input.is_action_just_pressed("jump") or Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_accept")):
 		velocity.y = JUMP_VELOCITY
 	if is_on_floor() and _dodge_requested(direction):
 		_start_dodge(direction)

@@ -40,12 +40,12 @@ func _run_player_controller_tests() -> void:
 	print("--- PlayerController ---")
 	var p: PlayerController = PlayerController.new()
 	p._ready()
-	_check("starts at full hp", p.hp == 3)
+	_check("starts at full hp", p.hp == 100)
 	p.take_damage(1)
-	_check("take_damage reduces hp", p.hp == 2)
+	_check("take_damage reduces hp", p.hp == 99)
 	p.is_dodging = true
 	p.take_damage(1)
-	_check("dodge blocks damage", p.hp == 2)
+	_check("dodge blocks damage", p.hp == 99)
 	p.is_dodging = false
 	var died_fired: Array[bool] = [false]
 	p.died.connect(func() -> void: died_fired[0] = true)
@@ -55,7 +55,7 @@ func _run_player_controller_tests() -> void:
 	var cp: Vector2 = Vector2(50.0, 50.0)
 	p.set_checkpoint(cp)
 	p.respawn()
-	_check("respawn restores hp", p.hp == 3)
+	_check("respawn restores hp", p.hp == 100)
 	_check("respawn clears dead flag", not p.is_dead)
 	_check("respawn at checkpoint", p.global_position == cp)
 	p.free()
@@ -63,14 +63,14 @@ func _run_player_controller_tests() -> void:
 func _run_player_stats_tests() -> void:
 	print("--- PlayerStats ---")
 	var stats: RefCounted = PlayerStatsScript.new()
-	_check("stats starts at three hp", stats.hp == 3)
+	_check("stats starts at full hp", stats.hp == 100)
 	stats.take_damage(2)
-	_check("stats damage reduces hp", stats.hp == 1)
-	stats.take_damage(1)
+	_check("stats damage reduces hp", stats.hp == 98)
+	stats.take_damage(98)
 	_check("stats death flag", stats.is_dead)
 	stats.set_respawn_position(Vector2(10.0, 20.0))
 	var position: Vector2 = stats.respawn()
-	_check("stats respawn restores hp", stats.hp == 3)
+	_check("stats respawn restores hp", stats.hp == 100)
 	_check("stats respawn position", position == Vector2(10.0, 20.0))
 
 func _run_checkpoint_tests() -> void:

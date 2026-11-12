@@ -1,13 +1,19 @@
 extends RefCounted
 
-const CheckpointManager = preload("res://scripts/core/checkpoint_manager.gd")
+const CheckpointManager = preload("res://scripts/player/checkpoint_manager.gd")
 const ProgressState = preload("res://scripts/core/progress_state.gd")
 const PlayerController = preload("res://scripts/player/player_controller.gd")
 
 func run() -> Array[String]:
 	var failures: Array[String] = []
 	var checkpoint := CheckpointManager.new()
+	if checkpoint.has_checkpoint:
+		failures.append("checkpoint starts empty")
 	checkpoint.activate(&"moscow_01", Vector2(120, 240), 75, 2)
+	if not checkpoint.has_checkpoint:
+		failures.append("register saves checkpoint")
+	if checkpoint.get_respawn_position() != Vector2(120, 240):
+		failures.append("get respawn returns registered position")
 	var state: Dictionary = checkpoint.respawn_state()
 	if state["id"] != "moscow_01":
 		failures.append("checkpoint stores id")
