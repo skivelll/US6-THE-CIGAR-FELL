@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="1_player"]
+[sub_resource type="RectangleShape2D" id="Shape_player"]
+size = Vector2(28, 64)
+
+[node name="Yulia" type="CharacterBody2D"]
+script = ExtResource("1_player")
+
+[node name="PlaceholderBody" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-14, -32, 14, -32, 14, 32, -14, 32)
+color = Color(0.82, 0.25, 0.55, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("Shape_player")
