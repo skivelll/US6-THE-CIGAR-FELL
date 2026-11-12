@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[node name="Epilogue" type="Node2D"]
+
+[node name="Caption" type="Label" parent="."]
+offset_left = 48.0
+offset_top = 48.0
+offset_right = 900.0
+offset_bottom = 120.0
+text = "ЭПИЛОГ · воспоминания продолжаются"

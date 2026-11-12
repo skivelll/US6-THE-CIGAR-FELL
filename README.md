@@ -25,10 +25,18 @@ docs/superpowers/ Design spec and implementation plan
 ## Running Tests
 
 ```powershell
-E:\Godot\Godot_v4.7.2-stable_win64.exe --headless --path E:\US6 --script tests/test_progress_state.gd
+& "E:\Godot\Godot_v4.7.2-stable_win64.exe" --headless --path E:\US6 --script res://tests/run_tests.gd
 ```
 
-Exit code 0 = all tests passed, 1 = failures.
+Exit code 0 = all tests passed, 1 = failures. The suite covers the post-finale epilogue, mandatory repeatable video-message launch contract, memory replays, replay isolation, and performance schema.
+
+## Post-finale content
+
+After `main_run_completed`, the deterministic epilogue ends on a warm Yulia/Watchman frame. The ashtray memory menu exposes replays for Moscow, warehouse, Ryazan, Danang, and the finale. Every replay creates a fresh `ProgressState`; it is not New Game+ and cannot alter the completed main run.
+
+The video-message path currently uses a replaceable presentation placeholder. It is intentionally not described as the finished personal video: the real media asset still needs to be supplied and encoded for the target build.
+
+Performance budgets used by the deterministic probe are documented in `docs/qa/us6-playtest-checklist.md`.
 
 ## Development
 

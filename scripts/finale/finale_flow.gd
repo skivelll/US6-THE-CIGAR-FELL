@@ -24,6 +24,7 @@ var sanboy_visible: bool = false
 var portak_freed: bool = false
 var watchman_freed: bool = false
 var ritual_completed_once: bool = false
+var postgame_unlocked: bool = false
 
 func _init(progress_state: ProgressState = null, controller: BaseController = null) -> void:
 	progress = progress_state if progress_state != null else ProgressState.new()
@@ -74,6 +75,7 @@ func complete_ritual() -> bool:
 	mutation_cleared = true
 	harmless_tattoos_preserved = true
 	main_run_completed = true
+	postgame_unlocked = true
 	ritual_completed.emit()
 	return true
 
