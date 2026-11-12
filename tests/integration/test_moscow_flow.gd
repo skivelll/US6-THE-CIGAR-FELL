@@ -3,6 +3,8 @@ extends RefCounted
 const ProgressStateScript = preload("res://scripts/core/progress_state.gd")
 const MoscowFlowScript = preload("res://scripts/levels/moscow_flow.gd")
 const CraneBossScript = preload("res://scripts/encounters/crane_boss.gd")
+const MoscowScene = preload("res://scenes/levels/moscow.tscn")
+const CraneScene = preload("res://scenes/encounters/crane_boss.tscn")
 
 func run() -> Array[String]:
 	var failures: Array[String] = []
