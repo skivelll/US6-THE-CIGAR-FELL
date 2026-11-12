@@ -1,0 +1,76 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://scenes/levels/ryazan/bridge.tscn" id="2_bridge"]
+[ext_resource type="PackedScene" path="res://scenes/levels/ryazan/attic.tscn" id="3_attic"]
+[ext_resource type="PackedScene" path="res://scenes/levels/ryazan/zazhigalka.tscn" id="4_zazhigalka"]
+
+[sub_resource type="RectangleShape2D" id="RyazanFloorShape"]
+size = Vector2(3840, 32)
+
+[node name="Ryazan" type="Node2D"]
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 3840.0
+offset_bottom = 720.0
+color = Color(0.08, 0.12, 0.18, 1)
+mouse_filter = 2
+[node name="Title" type="Label" parent="."]
+offset_left = 48.0
+offset_top = 32.0
+offset_right = 900.0
+offset_bottom = 76.0
+theme_override_colors/font_color = Color(0.98, 0.78, 0.32, 1)
+theme_override_font_sizes/font_size = 30
+text = "РЯЗАНЬ · АРБУЗНО-КЕТЧУПНЫЙ РЕЖИМ"
+[node name="Hint" type="Label" parent="."]
+offset_left = 50.0
+offset_top = 82.0
+offset_right = 950.0
+offset_bottom = 112.0
+theme_override_colors/font_color = Color(0.75, 0.84, 0.9, 1)
+theme_override_font_sizes/font_size = 16
+text = "A/D или стрелки — движение   Space — прыжок   Shift — бег   Ctrl — dodge"
+[node name="Bridge" parent="." instance=ExtResource("2_bridge")]
+position = Vector2(0, 0)
+[node name="Attic" parent="." instance=ExtResource("3_attic")]
+position = Vector2(960, 0)
+[node name="Roof" type="Node2D" parent="."]
+position = Vector2(1920, 0)
+[node name="Sky" type="ColorRect" parent="Roof"]
+offset_right = 960.0
+offset_bottom = 640.0
+color = Color(0.16, 0.20, 0.32, 1)
+mouse_filter = 2
+[node name="Roofline" type="Polygon2D" parent="Roof"]
+polygon = PackedVector2Array(0, 600, 960, 600, 820, 400, 120, 400)
+color = Color(0.42, 0.28, 0.34, 1)
+[node name="Label" type="Label" parent="Roof"]
+offset_left = 48.0
+offset_top = 140.0
+offset_right = 800.0
+offset_bottom = 190.0
+theme_override_colors/font_color = Color(0.94, 0.86, 0.7, 1)
+theme_override_font_sizes/font_size = 26
+text = "КРЫША · ГОРОД ВНИЗУ"
+[node name="Zazhigalka" parent="." instance=ExtResource("4_zazhigalka")]
+position = Vector2(2880, 0)
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(160, 540)
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, -170)
+limit_left = 0
+limit_top = 0
+limit_right = 3840
+limit_bottom = 720
+position_smoothing_enabled = true
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(1920, 640)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("RyazanFloorShape")
+[node name="Visual" type="ColorRect" parent="Floor"]
+offset_left = -1920.0
+offset_top = -16.0
+offset_right = 1920.0
+offset_bottom = 16.0
+color = Color(0.3, 0.22, 0.25, 1)
+mouse_filter = 2

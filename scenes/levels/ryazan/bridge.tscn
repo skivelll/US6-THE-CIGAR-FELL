@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3]
+
+[sub_resource type="RectangleShape2D" id="BridgeShape"]
+size = Vector2(960, 32)
+
+[node name="Bridge" type="Node2D"]
+[node name="Water" type="ColorRect" parent="."]
+offset_right = 960.0
+offset_bottom = 640.0
+color = Color(0.05, 0.19, 0.28, 1)
+mouse_filter = 2
+[node name="BridgeDeck" type="ColorRect" parent="."]
+offset_top = 530.0
+offset_right = 960.0
+offset_bottom = 640.0
+color = Color(0.55, 0.25, 0.18, 1)
+mouse_filter = 2
+[node name="Title" type="Label" parent="."]
+offset_left = 48.0
+offset_top = 140.0
+offset_right = 800.0
+offset_bottom = 190.0
+theme_override_colors/font_color = Color(0.98, 0.72, 0.3, 1)
+theme_override_font_sizes/font_size = 26
+text = "МОСТ · ПЕРВАЯ АРБУЗНАЯ ВОЛНА"
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(480, 530)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("BridgeShape")
