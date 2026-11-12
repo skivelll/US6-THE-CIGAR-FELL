@@ -8,6 +8,7 @@ var progress: ProgressState
 var strong_cooldown_remaining: float = 0.0
 var potion_charges: int = 0
 var last_attack: StringName = &""
+var combo_step_index: int = 0
 
 func _init(progress_state: ProgressState = null) -> void:
 	progress = progress_state if progress_state != null else ProgressState.new()
@@ -27,8 +28,9 @@ func request(kind: StringName) -> bool:
 			last_attack = kind
 			return true
 		&"combo_step":
-			if not progress.has_ability(&"combo"):
+			if not progress.has_ability(&"combo") or combo_step_index >= 3:
 				return false
+			combo_step_index += 1
 			last_attack = kind
 			return true
 		&"air_strong":

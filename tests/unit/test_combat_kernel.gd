@@ -22,6 +22,12 @@ func run() -> Array[String]:
 	progress.unlock_ability(&"combo")
 	if not attacks.request(&"combo_step"):
 		failures.append("combo unlocks from progress")
+	if not attacks.request(&"combo_step"):
+		failures.append("combo allows its third step")
+	if not attacks.request(&"combo_step"):
+		failures.append("combo allows its final step")
+	if attacks.request(&"combo_step"):
+		failures.append("combo stops after three steps")
 	if attacks.request(&"air_strong"):
 		failures.append("air strong is locked before Papy Flowers")
 	progress.unlock_ability(&"air_strong")
