@@ -1,4 +1,3 @@
-class_name Checkpoint
 extends Area2D
 
 signal activated(pos: Vector2)
